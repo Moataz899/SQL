@@ -1,2 +1,2 @@
 # SQL
-This repo for SQL basics and problem solving
+This repo for SQL basics and SQL Problems
