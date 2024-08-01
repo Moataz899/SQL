@@ -8,21 +8,23 @@
   - [SQL SELECT Statement](#sql-select-statement)
   - [The SQL WHERE Clause](#the-sql-where-clause)
   - [Operators in The WHERE Clause](#operators-in-the-where-clause)
-  - [Python Data Types](#python-data-types)
-    - [Examples:](#examples)
-  - [Setting the Specific Data Type](#setting-the-specific-data-type)
-  - [Basic Operation](#basic-operation)
-  - [Python Arithmetic Operators](#python-arithmetic-operators)
-  - [Python Arithmetic Operators Examples](#python-arithmetic-operators-examples)
-  - [Python Assignment Operators](#python-assignment-operators)
-  - [Python Comparison Operators](#python-comparison-operators)
-  - [Python Logical Operators](#python-logical-operators)
+  - [The SQL ORDER BY](#the-sql-order-by)
+  - [The SQL AND Operator](#the-sql-and-operator)
+  - [The SQL OR Operator](#the-sql-or-operator)
+  - [Combining AND and OR](#combining-and-and-or)
+  - [SQL NOT Operator](#sql-not-operator)
+  - [The SQL INSERT INTO Statement](#the-sql-insert-into-statement)
+  - [Insert Multiple Rows](#insert-multiple-rows)
+  - [SQL NULL Values](#sql-null-values)
+  - [The IS NOT NULL Operator](#the-is-not-null-operator)
+  - [The SQL UPDATE Statement](#the-sql-update-statement)
+  - [The SQL DELETE Statement](#the-sql-delete-statement)
+  - [Delete a Table](#delete-a-table)
   - [Python Identity Operators](#python-identity-operators)
-  - [Python Identity Operators](#python-identity-operators-1)
   - [Python Membership Operators](#python-membership-operators)
   - [Python Bitwise Operators](#python-bitwise-operators)
   - [Python Casting](#python-casting)
-    - [Examples:](#examples-1)
+    - [Examples:](#examples)
 
 
 ## What is a SQL?
@@ -130,170 +132,138 @@ WHERE Country='Mexico';
 | `LIKE`     | Search for a pattern              | `SELECT * FROM table WHERE column LIKE 'A%';` |
 | `IN`       | Specify multiple possible values  | `SELECT * FROM table WHERE column IN (10, 20, 30);` |
 
-## Python Data Types
+## The SQL ORDER BY
 
-*In programming, data type is an important concept,
-Variables can store data of different types, and different types can do different things.
-Python has the following data types built-in by default, in these categories:*
+*The *`ORDER BY`* keyword is used to sort the result-set in ascending or descending order.*
+
+* Example
+```SQL
+SELECT * FROM Products
+ORDER BY Price;
 ```
-Text Type:	str 
+*The *`ORDER BY`* keyword sorts the records in ascending order by default. To sort the records in descending order, use the *`DESC`* keyword.*
 
-Numeric Types:	int, float, complex
-
-Sequence Types:	list, tuple, range
-
-Mapping Type:	dict
-
-Set Types:	set, frozenset
-
-Boolean Type:	bool
-
-Binary Types: bytes, bytearray, memoryview
-
-None Type:	NoneType
+* Example
+```SQL
+SELECT * FROM Products
+ORDER BY Price DESC;
 ```
-### Examples:
-
-| Example                                | Data Type   |
-|----------------------------------------|-------------|
-| `x = "Hello World"                     ` | str         |
-| `x = 20                                ` | int         |
-| `x = 20.5                              ` | float       |
-| `x = 1j                                ` | complex     |
-| `x = ["apple", "banana", "cherry"]     ` | list        |
-| `x = ("apple", "banana", "cherry")     ` | tuple       |
-| `x = range(6)                          ` | range       |
-| `x = {"name" : "John", "age" : 36}     ` | dict        |
-| `x = {"apple", "banana", "cherry"}     ` | set         |
-| `x = frozenset({"apple", "banana", "cherry"})` | frozenset |
-| `x = True                  `             | bool        |
-| `x = b"Hello"             `              | bytes       |
-| `x = bytearray(5)  `                     | bytearray   |
-| `x = memoryview(bytes(5))`               | memoryview  |
-| `x = None `                              | NoneType    |
 
 
-## Setting the Specific Data Type
 
-*If you want to specify the data type, you can use the following constructor functions:*
+## The SQL AND Operator
 
-| Example                                       | Data Type   |
-|-----------------------------------------------|-------------|
-| `x = str("Hello World")                       ` | str         |
-| `x = int(20)                                 `  | int         |
-| `x = float(20.5)                             `  | float       |
-| `x = complex(1j)                             `  | complex     |
-| `x = list(("apple", "banana", "cherry"))     `  | list        |
-| `x = tuple(("apple", "banana", "cherry"))    `  | tuple       |
-| `x = range(6)                                `  | range       |
-| `x = dict(name="John", age=36)               `  | dict        |
-| `x = set(("apple", "banana", "cherry"))     `   | set         |
-| `x = frozenset(("apple", "banana", "cherry"))`  | frozenset   |
-| `x = bool(5)             `                      | bool        |
-| `x = bytes(5)           `                       | bytes       |
-| `x = bytearray(5)       `                       | bytearray   |
-| `x = memoryview(bytes(5))`                      | memoryview  |
+*The *`AND`* operator is used to combine two or more conditions in a `WHERE`*
 
-
-## Basic Operation
-*Operators are used to perform operations on variables and values,*
-*Python divides the operators into the following groups:*
-* Arithmetic operators
-* Assignment operators
-* Comparison operators
-* Logical operators
-* Identity operators
-* Membership operators
-* Bitwise operators
-
-## Python Arithmetic Operators
-*Arithmetic operators are used with numeric values to perform common mathematical operations:*
-| Operator | Name           | Example  |
-|----------|----------------|----------|
-| `+`        | Addition       | `x + y `  |
-| `- `       | Subtraction    | `x - y  ` |
-| `* `       | Multiplication | `x * y `  |
-| `/ `       | Division       | `x / y  ` |
-| `% `       | Modulus        | `x % y `  |
-| `**`       | Exponentiation | `x ** y ` |
-| `//`       | Floor division | `x // y ` |
-
-## Python Arithmetic Operators Examples
-```python
-# Addition
-x = 5
-y = 3
-result = x + y
-print("Addition: ", result)
-
-# Subtraction
-result = x - y
-print("Subtraction: ", result)
-
-# Multiplication
-result = x * y
-print("Multiplication: ", result)
-
-# Division
-result = x / y
-print("Division: ", result)
-
-# Modulus
-result = x % y
-print("Modulus: ", result)
-
-# Exponentiation
-result = x ** y
-print("Exponentiation: ", result)
-
-# Floor division
-result = x // y
-print("Floor division: ", result)
+* Example
+```SQL
+SELECT *
+FROM Customers
+WHERE Country = 'Spain' AND CustomerName LIKE 'G%';
 ```
-## Python Assignment Operators
-*Assignment operators are used to assign values to variables:*
+* The `AND` operator displays a record if all the conditions are TRUE.
 
-| Operator | Example        | Same As       |
-|----------|----------------|---------------|
-| `=`        | x = 5          |` x = 5`       |
-| `+=`       | x += 3         | `x = x + 3 `   |
-| `-=`       | x -= 3         | `x = x - 3  ` |
-| `*=`       | x *= 3         | `x = x * 3  ` |
-| `/=`       | x /= 3         | `x = x / 3 `  |
-| `%=`       | x %= 3         | `x = x % 3  ` |
-| `//=`      | x //= 3        | `x = x // 3 ` |
-| `**=`      | x **= 3        | `x = x ** 3  `|
-| `&=`       | x &= 3         | `x = x & 3  ` |
-| `^=`       | x ^= 3         | `x = x ^ 3 `  |
-| `>>=`      | x >>= 3        | `x = x >> 3 ` |
-| `<<=`      | x <<= 3        | `x = x << 3`  |
+* The `OR` operator displays a record if any of the conditions are TRUE.
 
+## The SQL OR Operator
 
-## Python Comparison Operators
-*Comparison operators are used to compare two values:*
+*The `OR` operator is used to combine two or more conditions in a `WHERE` clause*
 
-| Operator | Name                        | Example  |
-|----------|-----------------------------|----------|
-| `==`       | Equal                       | `x == y `  |
-| `!=`       | Not equal                   | `x != y`   |
-| `>`        | Greater than                | `x > y`    |
-| `<`       | Less than                   | `x < y`    |
-| `>=`      | Greater than or equal to    | `x >= y `  |
-| `<=`       | Less than or equal to       | `x <= y`   |
+* Example
+```SQL
+SELECT *
+FROM Customers
+WHERE Country = 'Germany' OR Country = 'Spain';
+```
 
+## Combining AND and OR
 
-## Python Logical Operators
-*Logical operators are used to combine conditional statements:*
+*The `AND` and `OR` operators can be combined to create more complex conditions.*
 
-| Operator | Description                                    | Example                              |
-|----------|------------------------------------------------|--------------------------------------|
-| `and `     | Returns True if both statements are true       | `x < 5 and x < 10`                   |
-| `or`       | Returns True if one of the statements is true  | `x < 5 or x < 4`                    |
-| `not`      | Reverses the result, returns False if the result is true | `not(x < 5 and x < 10)`  |
+* Example
+```SQL
+SELECT * FROM Customers
+WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');
+```
 
+## SQL NOT Operator
+*The `NOT` operator is used to negate a condition, also called the negative result.*
 
-## Python Identity Operators
-*Identity operators are used to compare the objects, not if they are equal, but if they are actually the same object, with the same memory location:*
+* Example
+```SQL
+SELECT * FROM Customers
+WHERE NOT Country = 'Spain';
+```
+## The SQL INSERT INTO Statement
+
+*The `INSERT INTO` statement is used to add new records to a database table.*
+
+* Example
+```SQL
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+```
+
+## Insert Multiple Rows
+*The `INSERT INTO` statement can be used to insert multiple rows at once.*
+
+* Example
+```SQL
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES
+('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway'),
+('Greasy Burger', 'Per Olsen', 'Gateveien 15', 'Sandnes', '4306', 'Norway'),
+('Tasty Tee', 'Finn Egan', 'Streetroad 19B', 'Liverpool', 'L1 0AA', 'UK');
+```
+
+## SQL NULL Values
+*In SQL, `NULL` is a special value that represents an unknown or missing value.*
+
+* Example
+```SQL
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NULL;
+```
+
+## The IS NOT NULL Operator
+*The `IS NOT NULL` operator is used to select records where the specified field is not NULL*
+
+* Example
+```SQL
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NOT NULL;
+```
+
+## The SQL UPDATE Statement
+*The `UPDATE` statement is used to modify existing records in a database table.*
+
+* Example
+```SQL
+UPDATE Customers
+SET ContactName = 'Moataz Dahy', City= 'Cairo'
+WHERE CustomerID = 1;
+```
+
+## The SQL DELETE Statement
+
+*The `DELETE` statement is used to delete existing records in a database table.*
+
+* Example
+```SQL
+DELETE FROM Customers WHERE CustomerName='Moataz Dahy';
+```
+
+## Delete a Table
+
+*The `DROP TABLE` statement is used to delete a table from a database.*
+
+* Example
+```SQL
+DROP TABLE Customers;
+```
+
 
 ## Python Identity Operators
 | Operator | Description                                | Example       |
