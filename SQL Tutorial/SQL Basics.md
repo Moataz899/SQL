@@ -20,11 +20,19 @@
   - [The SQL UPDATE Statement](#the-sql-update-statement)
   - [The SQL DELETE Statement](#the-sql-delete-statement)
   - [Delete a Table](#delete-a-table)
-  - [Python Identity Operators](#python-identity-operators)
-  - [Python Membership Operators](#python-membership-operators)
-  - [Python Bitwise Operators](#python-bitwise-operators)
-  - [Python Casting](#python-casting)
-    - [Examples:](#examples)
+  - [The SQL SELECT TOP Clause](#the-sql-select-top-clause)
+  - [SQL Aggregate Functions](#sql-aggregate-functions)
+    - [The most commonly used SQL aggregate functions are:](#the-most-commonly-used-sql-aggregate-functions-are)
+  - [The SQL MIN() and MAX() Functions](#the-sql-min-and-max-functions)
+  - [The SQL COUNT() Function](#the-sql-count-function)
+  - [The SQL SUM() Function](#the-sql-sum-function)
+  - [The SQL AVG() Function](#the-sql-avg-function)
+  - [The SQL LIKE Operator](#the-sql-like-operator)
+    - [There are two wildcards often used in conjunction with the `LIKE` operator:](#there-are-two-wildcards-often-used-in-conjunction-with-the-like-operator)
+  - [SQL Wildcard Characters](#sql-wildcard-characters)
+  - [The SQL IN Operator](#the-sql-in-operator)
+  - [The SQL BETWEEN Operator](#the-sql-between-operator)
+  - [SQL Aliases](#sql-aliases)
 
 
 ## What is a SQL?
@@ -265,57 +273,149 @@ DROP TABLE Customers;
 ```
 
 
-## Python Identity Operators
-| Operator | Description                                | Example       |
-|----------|--------------------------------------------|---------------|
-| `is`       | Returns True if both variables are the same object | `x is y`      |
-| `is not`   | Returns True if both variables are not the same object | `x is not y`  |
+## The SQL SELECT TOP Clause
+*The `SELECT TOP` clause is used to select the top n number of records from a database.*
+
+*The `SELECT TOP` clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.*
+
+* Example
+```SQL
+SELECT TOP 3 * FROM Customers;
+```
 
 
-## Python Membership Operators
-*Membership operators are used to test if a sequence is presented in an object:*
 
-| Operator | Description                                          | Example     |
-|----------|------------------------------------------------------|-------------|
-| `in`      | Returns True if a sequence with the specified value is present in the object | `x in y`    |
-| `not in`   | Returns True if a sequence with the specified value is not present in the object | `x not in y`|
+## SQL Aggregate Functions
+*SQL `aggregate functions` are used to perform calculations on a set of values and return a single value.*
 
+*`Aggregate functions` are often used with the `GROUP BY` clause of the `SELECT` statement. The `GROUP BY` clause splits the result-set into groups of values and the aggregate function can be used to return a single value for each group.*
 
-## Python Bitwise Operators
-*Bitwise operators are used to compare (binary) numbers:*
+### The most commonly used SQL aggregate functions are:
+* `MAX()`: Returns the maximum value in a set of values.
+* `MIN()`: Returns the minimum value in a set of values.
+* `AVG()`: Returns the average value in a set of values.
+* `SUM()`: Returns the total sum of a set of values.
+* `COUNT()`: Returns the number of rows in a set of values.
 
+## The SQL MIN() and MAX() Functions
+*The `MIN()` and `MAX()` functions are used to find the smallest and largest values of the selected column.*
 
-| Operator | Name | Description                                                                                   | Example     |
-|----------|------|-----------------------------------------------------------------------------------------------|-------------|
-| `&`  | AND  | Sets each bit to 1 if both bits are 1                                                         | `x & y`     |
-| `\|`  | OR   | Sets each bit to 1 if one of two bits is 1|`x \|  y`     |
-| `^  `      | XOR  | Sets each bit to 1 if only one of two bits is 1                                               | `x ^ y`     |
-| `~ `       | NOT  | Inverts all the bits                                                                          | `~x`        |
-| `<<  `     | Zero fill left shift | Shift left by pushing zeros in from the right and let the leftmost bits fall off | `x << 2`    |
-| `>>`       | Signed right shift | Shift right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off | `x >> 2`    
+* Example
+```SQL
+SELECT MAX(Age)
+FROM Employees;
+```
+```SQL
+SELECT MIN(Age)
+FROM Employees;
+```
 
-## Python Casting
+## The SQL COUNT() Function
+*The `COUNT()` function is used to count the number of rows in a table.*
 
-*There may be times when you want to specify a type on a variable. This can be done with casting. Python is an object-oriented language, and as such, it uses classes to define data types, including its primitive types.*
+* Example
+```SQL
+SELECT COUNT(Age)
+FROM Employees;
+```
+## The SQL SUM() Function
+*The `SUM()` function is used to calculate the total of a set of values.*
+* Example
+```SQL
+SELECT SUM(Age)
+FROM Employees;
+```
 
-*Casting in Python is done using constructor functions:*
+## The SQL AVG() Function
+*The `AVG()` function is used to calculate the average of a set of values.*
+* Example
+```SQL
+SELECT AVG(Age)
+FROM Employees;
+```
 
-- **`int()`**: Constructs an integer number from an integer literal, a float literal (by removing all decimals), or a string literal (providing the string represents a whole number).
-- **`float()`**: Constructs a float number from an integer literal, a float literal, or a string literal (providing the string represents a float or an integer).
-- **`str()`**: Constructs a string from a wide variety of data types, including strings, integer literals, and float literals.
+## The SQL LIKE Operator
+*The `LIKE` operator is used to search for a specified pattern in a column.*
 
-### Examples:
+### There are two wildcards often used in conjunction with the `LIKE` operator:
 
-```python
-# Casting to integer
-x = int(3.14)    # x will be 3
-y = int("42")    # y will be 42
+* The percent sign `%` represents zero, one, or multiple characters.
 
-# Casting to float
-a = float(7)     # a will be 7.0
-b = float("3.14")# b will be 3.14
+* The underscore `_` represents a single character.
 
-# Casting to string
-m = str(10)      # m will be '10'
-n = str(3.14)    # n will be '3.14'
+* Example
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName LIKE 'a%';
+```
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName LIKE 'a__%';
+```
+## SQL Wildcard Characters
+*A wildcard character is used to substitute one or more characters in a string.*
+
+*Wildcard characters are used with the LIKE operator. The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.*
+
+| Symbol | Description                                      |
+|--------|--------------------------------------------------|
+| `%`      | Represents zero or more characters               |
+| `_`      | Represents a single character                    |
+| `[]`     | Represents any single character within the brackets |
+| `^`      | Represents any character not in the brackets     |
+| `-`      | Represents any single character within the specified range |
+| `{}`     | Represents any escaped character                 |
+
+* Examples
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName LIKE 'a%';
+```
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName LIKE 'a__%';
+```
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName LIKE '[bsp]%';
+```
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName LIKE 'a__%';
+```
+## The SQL IN Operator
+*The `IN` operator is used to specify multiple values in a `WHERE` clause.*
+
+*The `IN` operator is a shorthand for multiple `OR` conditions.*
+
+* Example
+```SQL
+SELECT * FROM Employees
+WHERE EmployeeName IN ('Moataz', 'Ahmed', 'Mohamed');
+```
+
+## The SQL BETWEEN Operator
+*The `BETWEEN` operator is used to select values within a range.*
+
+*The `BETWEEN` operator is inclusive: begin and end values are included.*
+
+* Example
+```SQL
+SELECT *  FROM Employees
+WHERE Age BETWEEN 10 AND 25;
+```
+
+## SQL Aliases
+* SQL aliases are used to give a table, or a column in a table, a temporary name.
+
+* Aliases are often used to make column names more readable.
+
+* An alias only exists for the duration of that query.
+
+* An alias is created with the `AS` keyword.
+
+* Example
+```SQL
+SELECT EmployeeID AS ID  
+FROM Employees;
 ```
