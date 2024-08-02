@@ -33,6 +33,22 @@
   - [The SQL IN Operator](#the-sql-in-operator)
   - [The SQL BETWEEN Operator](#the-sql-between-operator)
   - [SQL Aliases](#sql-aliases)
+  - [SQL JOIN](#sql-join)
+  - [Different Types of SQL JOINs](#different-types-of-sql-joins)
+    - [Here are the different types of the JOINs in SQL:](#here-are-the-different-types-of-the-joins-in-sql)
+  - [SQL INNER JOIN](#sql-inner-join)
+  - [SQL LEFT JOIN](#sql-left-join)
+  - [SQL RIGHT JOIN](#sql-right-join)
+  - [SQL FULL OUTER JOIN](#sql-full-outer-join)
+  - [SQL Self Join](#sql-self-join)
+  - [SQL UNION Operator](#sql-union-operator)
+  - [UNION ALL Syntax](#union-all-syntax)
+  - [The SQL GROUP BY Statement](#the-sql-group-by-statement)
+  - [The SQL HAVING Clause](#the-sql-having-clause)
+  - [SQL EXISTS Operator](#sql-exists-operator)
+  - [The SQL SELECT INTO Statement](#the-sql-select-into-statement)
+  - [The SQL CASE Expression](#the-sql-case-expression)
+  - [SQL Comments](#sql-comments)
 
 
 ## What is a SQL?
@@ -419,3 +435,202 @@ WHERE Age BETWEEN 10 AND 25;
 SELECT EmployeeID AS ID  
 FROM Employees;
 ```
+## SQL JOIN
+
+*A `JOIN` clause is used to combine rows from two or more tables, based on a related column between them.*
+
+* Example
+```SQL
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+```
+
+## Different Types of SQL JOINs
+### Here are the different types of the JOINs in SQL:
+
+* `(INNER) JOIN`: Returns records that have matching values in both tables
+* `LEFT (OUTER) JOIN`: Returns all records from the left table, and the matched records from the right table
+
+* `RIGHT (OUTER) JOIN`: Returns all records from the right table, and the matched records from the left table
+
+* `FULL (OUTER) JOIN`: Returns all records when there is a match in either left or right table
+
+## SQL INNER JOIN
+
+*The `INNER JOIN` keyword selects records that have matching values in both tables.*
+
+* Example
+```SQL
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+```
+
+## SQL LEFT JOIN
+
+*The `LEFT JOIN` keyword returns all the records from the left table, and the matched records.*
+
+* Example
+```SQL
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+```
+
+## SQL RIGHT JOIN
+*The `RIGHT JOIN` keyword returns all the records from the right table, and the matched records.*
+
+* Example
+```SQL
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+RIGHT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+```
+## SQL FULL OUTER JOIN
+*The `FULL OUTER JOIN` keyword returns all the records when there is a match in either left.*
+* Example
+```SQL
+SELECT Employees.EmployeeName, Departments.DepartmentName
+FROM Employees
+FULL OUTER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+```
+
+## SQL Self Join
+*The `SELF JOIN` keyword is used to join a table to itself as if the table were.*
+
+
+* Example
+```SQL
+SELECT e1.EmployeeName, e2.DepartmentName
+FROM Employees e1
+JOIN Employees e2 ON e1.DepartmentID = e2.DepartmentID;
+```
+
+## SQL UNION Operator
+
+*The `UNION` operator is used to combine the result-set of two or more `SELECT` statements.*
+
+* Every SELECT statement within `UNION` must have the same number of columns.
+  
+* The columns must also have similar data types
+  
+* Also, the columns in the `ORDER BY` clause must be sorted in the same order in
+
+* Example
+```SQL
+SELECT City FROM Customers
+UNION
+SELECT City FROM Suppliers
+ORDER BY City;
+```
+
+## UNION ALL Syntax
+*The `UNION ALL` operator selects only distinct values by default. To allow duplicate values.*
+
+* Example
+```SQL
+SELECT City FROM Customers
+UNION ALL
+SELECT City FROM Suppliers
+ORDER BY City;
+```
+
+## The SQL GROUP BY Statement
+
+*The `GROUP BY` statement is used in conjunction with the `SELECT` statement to group data.*
+
+* Example
+```SQL
+SELECT Employees.DepartmentID, COUNT(Employees.EmployeeName) AS EmployeeCount
+FROM Employees
+GROUP BY Employees.DepartmentID;
+```
+## The SQL HAVING Clause
+*The `HAVING` clause is used in conjunction with the `GROUP BY` clause to filter  groups of rows created by the `GROUP BY` clause based on a specified condition.*
+
+* Example
+```SQL
+SELECT Employees.DepartmentID, COUNT(Employees.EmployeeName) AS EmployeeCount
+FROM Employees
+GROUP BY Employees.DepartmentID
+HAVING COUNT(Employees.EmployeeName) > 5;
+```
+## SQL EXISTS Operator
+*The `EXISTS` operator is used to test if a row exists in a subquery.*
+
+*The `EXISTS` operator returns TRUE if the subquery returns one or more records.*
+
+* Example
+```SQL
+SELECT EmployeeName
+FROM Employees e
+WHERE EXISTS (
+    SELECT 1
+    FROM Departments d
+    WHERE e.DepartmentID = d.DepartmentID
+    AND d.DepartmentName = 'Sales'
+);
+```
+
+## The SQL SELECT INTO Statement
+*The `SELECT INTO` statement copies data from one table into a new table.*
+
+* Example
+```SQL
+SELECT EmployeeName, DepartmentID
+INTO NewEmployeesTable
+FROM Employees;
+```
+## The SQL CASE Expression
+
+*The `CASE` expression is used to perform conditional operations.*
+
+* Example
+```SQL
+SELECT EmployeeName,
+       DepartmentID,
+       CASE
+           WHEN DepartmentID = 1 THEN 'HR'
+           WHEN DepartmentID = 2 THEN 'Sales'
+           ELSE 'Other'
+       END AS DepartmentName
+FROM Employees;
+```
+
+## SQL Comments
+
+* SQL comments are used to add notes to your code.*
+  * There are two types of comments in SQL: single-line comments and multi-line comments.
+  
+* Single Line Comments
+   * Single line comments start with `--`.
+   * Any text between -- and the end of the line will be ignored (will not be executed).
+   * Example
+    ```SQL
+    SELECT * FROM Customers -- WHERE City='Berlin';
+     ```
+* Multi-line Comments
+    * Multi-line comments start with `/*` and end with `*/`.
+    * Any text between `/*` and `*/` will be ignored.
+    * Example
+    ```SQL
+    /*SELECT * FROM Customers;
+    SELECT * FROM Products;
+    SELECT * FROM Orders;
+    SELECT * FROM Categories;*/
+    SELECT * FROM Suppliers;
+     ```
+
+<div align="center">
+  By: Moataz Dahy
+</div>
+
+
+
+
+
+
+
+
+   
